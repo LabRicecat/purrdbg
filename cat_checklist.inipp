@@ -1,0 +1,10 @@
+[Main]
+
+[Info]
+name = "purrdbg"
+version = "0.0.0"
+
+[Download]
+dependencies = ["https://raw.githubusercontent.com/labricecat/nyasm/main/","https://raw.githubusercontent.com/catcaretaker/kittenlexer/main/"]
+files = ["ui.hpp","parser.hpp","state.hpp","execution.hpp"]
+
