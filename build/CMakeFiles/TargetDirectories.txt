@@ -1,0 +1,3 @@
+/home/sirwolf/Desktop/Programming/purrdbg/build/CMakeFiles/purrdbg.dir
+/home/sirwolf/Desktop/Programming/purrdbg/build/CMakeFiles/edit_cache.dir
+/home/sirwolf/Desktop/Programming/purrdbg/build/CMakeFiles/rebuild_cache.dir
