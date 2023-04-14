@@ -10,4 +10,4 @@ add_executable(purrdbg
     main.cpp
 )
 
-target_compile_options(purrdbg PRIVATE -lncurses -ldl)
+target_link_options(purrdbg PRIVATE -lncurses -ldl)
