@@ -21,7 +21,7 @@ $ purrdbg [file.nyasm]
 [w]ipe        -> clear the shell
 [b]reakpoint  -> add a breakpoint
 [v]iew        -> view a heap address
-[s]tack      -> view the stack
+[s]tack       -> view the stack
 [r]un         -> start the program
 [c]ontinue    -> continue execution
 [n]ext        -> step one line
