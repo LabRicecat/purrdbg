@@ -11,3 +11,5 @@ add_executable(purrdbg
 )
 
 target_link_options(purrdbg PRIVATE -lncurses -ldl)
+
+install(TARGETS purrdbg)

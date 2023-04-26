@@ -38,7 +38,7 @@ struct DebugInfo {
             if(i[1] != ":") return false;
             if(i[3] != "-") return false;
             try {
-                data.push_back(Section{std::stoull(i[0]),std::stoull(i[2]),std::stoull(i[4])});
+                data.push_back(Section{std::stoll(i[0]),std::stoll(i[2]),std::stoll(i[4])});
             }
             catch(...) { return false; }
         }

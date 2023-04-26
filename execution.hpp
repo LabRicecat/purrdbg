@@ -41,7 +41,7 @@ bool handle_input(int input, Screen& screen, DisplayPosition& position, Debugger
             {
                 auto input = prompt_shell(screen,"\nBreakpoint: ");
                 try {
-                    position_t line = std::stoull(input);
+                    position_t line = std::stoll(input);
                     debugger.add_breakpoint(line);
                     app_content(screen.shell,"\nAdded!");
                 }
@@ -53,7 +53,7 @@ bool handle_input(int input, Screen& screen, DisplayPosition& position, Debugger
             {
                 auto input = prompt_shell(screen,"\nHeapView: ");
                 try {
-                    position_t address = std::stoull(input);
+                    position_t address = std::stoll(input);
                     app_content(screen.shell,"\n" + std::to_string(address) + ": " + std::to_string(debugger.machine.heawp[address]));
                 }
                 catch(...) {
@@ -137,6 +137,21 @@ void run_debugger(std::string file) {
     ;
     auto lines = lexer.lex(read_file(file));
 
+    Debugger debugger;
+    std::string debugfile;
+    try {
+        debugger.machine = compile(read_file(file),true,&debugfile);
+    }
+    catch(FailedExecutionException& err) {
+        std::cout << "\n\nPurrdbg: Unable to start debugging, errors occured.\n";
+        return;
+    }
+
+    if(!debugger.debugfile.load(debugfile)) {
+        std::cout << "Purrdbg: Unable to debug: Debug file loading unexpectedly failed.\nTHIS IS AN ERROR, please report by opening an issue on github! (https://github.com/LabRicecat/purrgbd)\n";
+        return;
+    }
+
     WINDOW* main_window = initscr();
     noecho();
     nodelay(main_window,TRUE);
@@ -165,15 +180,7 @@ void run_debugger(std::string file) {
 
     DisplayPosition position = {0,lines.size()-3,0};
     Screen picture = {display,shell};
-    Debugger debugger;
-    std::string debugfile;
-    debugger.machine = compile(read_file(file),true,&debugfile);
-
-    if(!debugger.debugfile.load(debugfile)) {
-        cleanup(picture);
-        return;
-    }
-
+    
     refill_window(picture.display,position,lines,debugger);
     app_content(picture.shell,"-- Purrdgb ---");
     while(true) 
